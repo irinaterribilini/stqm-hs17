@@ -9,7 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>9</java.version>
 		<junit.version>4.12</junit.version>
 		<dbunit.version>2.5.4</dbunit.version>
 		<dependency.locations.enabled>false</dependency.locations.enabled>
@@ -79,7 +79,6 @@
 							<encoding>UTF-8</encoding>
 							<consoleOutput>true</consoleOutput>
 							<failsOnError>true</failsOnError>
-							<linkXRef>false</linkXRef>
 							<suppressionsLocation>src/main/config/suppressions.xml</suppressionsLocation>
 						</configuration>
 						<goals>
