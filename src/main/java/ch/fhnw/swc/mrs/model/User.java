@@ -63,6 +63,9 @@ public class User {
    */
   private List<Rental> rentals = new LinkedList<Rental>();
 
+  private List<Bill> bills = new LinkedList<Bill>();
+
+
   /**
    * Create a new user with the given name information.
    * 
@@ -132,11 +135,19 @@ public class User {
     return rentals;
   }
 
+  public List<Bill> getBills() {
+    return bills;
+  }
+
   /**
    * @param someRentals set the user's rentals.
    */
   public void setRentals(List<Rental> someRentals) {
     this.rentals = someRentals;
+  }
+
+  public void setBills(List<Bill> someBills) {
+    this.bills = someBills;
   }
 
   /** {@inheritDoc} */
