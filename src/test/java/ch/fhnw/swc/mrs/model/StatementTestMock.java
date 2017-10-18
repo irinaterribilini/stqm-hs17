@@ -16,25 +16,6 @@ public class StatementTestMock {
     private Statement s;
     private List<Rental> rentals;
 
-    static class TestStatement extends Statement{
-
-        /**
-         * Creates a statement object for a person (with the given name parameter) and a list of rentals.
-         *
-         * @param name      the family name.
-         * @param firstName the first name.
-         * @param rentals   a list of rentals to be billed.
-         */
-        public TestStatement(String name, String firstName, List<Rental> rentals) {
-            super(name, firstName, rentals);
-        }
-
-        @Override
-        public String print() {
-            return null;
-        }
-    }
-
     @Before
     public void setup() {
         Rental r1 = mock(Rental.class);
@@ -49,7 +30,7 @@ public class StatementTestMock {
 
     @Test
     public void testStatement() {
-        s = new TestStatement("Muster", "Hans", rentals);
+        s = mock(Statement.class, withSettings().useConstructor("Muster", "Hans", rentals).defaultAnswer(CALLS_REAL_METHODS));
         assertEquals("Muster", s.getLastName());
         assertEquals("Hans", s.getFirstName());
         assertEquals(3, s.getRentals().size());
@@ -57,23 +38,25 @@ public class StatementTestMock {
 
     @Test
     public void testFirstName() {
+        assertIllegalArgumentCtor("Muster", "Maximilian", rentals);
+    }
+
+    @Test
+    public void testLastName() {
+        assertIllegalArgumentCtor("Mustermann", "Hans", rentals);
+    }
+
+    @Test
+    public void testRentals() {
+        assertIllegalArgumentCtor("Muster", "Hans", null);
+    }
+
+    private void assertIllegalArgumentCtor(String name, String firstName, List<Rental> rentals) {
         try {
-            mock(Statement.class, withSettings().useConstructor("Muster", "Maximilian", rentals).defaultAnswer(CALLS_REAL_METHODS));
-        }catch (Exception e){
-            //assertTrue(Throwables.getRootCause(e) instanceof IllegalArgumentException);
+            mock(Statement.class, withSettings().useConstructor(name, firstName, rentals).defaultAnswer(CALLS_REAL_METHODS));
+        } catch (Exception e) {
             assertEquals(IllegalArgumentException.class, Throwables.getRootCause(e).getClass());
         }
-
-    }
-
-    @Test(expected=IllegalArgumentException.class)
-    public void testLastName() {
-       new TestStatement("Mustermann", "Hans", rentals);
-    }
-
-    @Test(expected=IllegalArgumentException.class)
-    public void testRentals() {
-       new TestStatement("Muster", "Hans", null);
     }
 
 }
