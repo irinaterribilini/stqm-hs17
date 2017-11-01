@@ -10,6 +10,8 @@ pipeline {
 			}
 		}
 		stage('Compile & Test') {
+		    git url: 'https://github.com/irinaterribilini/stqm-hs17'
+
 		    withMaven {
 		        maven: 'Default'
 		        mavenLocalRepo: '.repository')
