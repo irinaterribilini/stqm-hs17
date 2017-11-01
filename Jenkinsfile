@@ -12,7 +12,7 @@ pipeline {
 		stage('Compile & Test') {
 			steps {
 				echo 'running Maven build'
-				mvn 'clean package site'
+				maven 'clean package site'
 			}
 			post {
 				success {
