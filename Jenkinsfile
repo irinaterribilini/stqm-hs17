@@ -7,10 +7,10 @@ pipeline {
 		stage('Initialize') {
 			steps {
 				echo 'Initializing....'
-				maven: 'Default'
 			}
 		}
 		stage('Compile & Test') {
+			maven: 'Default'
 			steps {
 				echo 'running Maven build'
 				sh 'mvn clean package site'
