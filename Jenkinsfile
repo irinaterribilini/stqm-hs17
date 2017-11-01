@@ -2,7 +2,12 @@
 
 pipeline {
 	agent any
-	
+
+	tools {
+        maven 'Default'
+        jdk 'Default'
+     }
+
 	stages {
 		stage('Initialize') {
 			steps {
@@ -13,11 +18,7 @@ pipeline {
 
 			steps {
 				echo 'running Maven build'
-				withMaven (
-                    maven: 'Default'
-                ) {
-				sh "mvn clean package site"
-				}
+				sh 'mvn clean package site'
 			}
 			post {
 				success {
