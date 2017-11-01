@@ -11,12 +11,11 @@ pipeline {
 		}
 		stage('Compile & Test') {
 
-		    withMaven {
-		        maven: 'Default'
-		    }
-
 			steps {
 				echo 'running Maven build'
+				withMaven {
+                    maven: 'Default'
+                }
 				sh 'mvn clean package site'
 			}
 			post {
