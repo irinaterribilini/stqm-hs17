@@ -16,7 +16,7 @@ pipeline {
 				withMaven (
                     maven: 'Default'
                 ) {
-				sh 'mvn clean package site'
+				sh "mvn clean package site"
 				}
 			}
 			post {
