@@ -10,7 +10,11 @@ pipeline {
 			}
 		}
 		stage('Compile & Test') {
-			maven: 'Default'
+		    withMaven {
+		        maven: 'Default'
+		        mavenLocalRepo: '.repository')
+		    }
+
 			steps {
 				echo 'running Maven build'
 				sh 'mvn clean package site'
