@@ -7,12 +7,13 @@ pipeline {
 		stage('Initialize') {
 			steps {
 				echo 'Initializing....'
+				maven: 'Default'
 			}
 		}
 		stage('Compile & Test') {
 			steps {
 				echo 'running Maven build'
-				maven 'clean package site'
+				sh 'mvn clean package site'
 			}
 			post {
 				success {
