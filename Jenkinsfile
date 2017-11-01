@@ -16,7 +16,7 @@ pipeline {
 				withMaven (
                     maven: 'Default'
                 ) {
-				sh "mvn clean package site"
+				powershell "mvn clean package site"
 				}
 			}
 			post {
