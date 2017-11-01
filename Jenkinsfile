@@ -13,10 +13,11 @@ pipeline {
 
 			steps {
 				echo 'running Maven build'
-				withMaven {
+				withMaven (
                     maven: 'Default'
-                }
+                ) {
 				sh 'mvn clean package site'
+				}
 			}
 			post {
 				success {
