@@ -34,6 +34,11 @@ pipeline {
 		stage('System Tests') {
 			steps {
 				echo 'running Docker'
+				docker {
+                    image 'blacklabelops:hsqldb'
+                    label 'HSQLDB'
+                    args  '-d -p 9001:9001'
+                }
 			}
 		}
 	}
