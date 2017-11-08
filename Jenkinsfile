@@ -4,7 +4,6 @@ pipeline {
 	agent {
 	    docker {
 	     image 'hsqldb'
-	     label 'HSQLDB'
          args  '-d -p 9001:9001'
 	    }
 	}
