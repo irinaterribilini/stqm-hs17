@@ -36,11 +36,11 @@ pipeline {
 				echo 'running Docker'
 			}
 		}
-		stage('Finishing build') {
-		    steps {
-		        echo 'Saving Artifacts...'
-                archiveArtifacts artifacts: '**/target/checkstyle-result.xml, **/target/jacoco.exec, **/target/MRSfx*, **/target/site/**/*', onlyIfSuccessful: true
-		    }
-		}
 	}
+	post {
+            always {
+                archiveArtifacts artifacts: '**/target/**/*', onlyIfSuccessful: true
+                junit '**/target/surefire-reports/*.xml'
+            }
+    }
 }
