@@ -39,7 +39,7 @@ pipeline {
 		stage('Finishing build') {
 		    steps {
 		        echo 'Saving Artifacts...'
-                archiveArtifacts artifacts: '**/target/checkstyle-results.xml, **/target/MRSfx*, **/target/site/**/*', onlyIfSuccessful: true
+                archiveArtifacts artifacts: '**/target/checkstyle-result.xml, **/target/MRSfx*, **/target/site/**/*', onlyIfSuccessful: true
 		    }
 		}
 	}
