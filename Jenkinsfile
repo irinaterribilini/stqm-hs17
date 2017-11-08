@@ -1,12 +1,7 @@
 #!/usr/bin/env groovy
 
 pipeline {
-	agent {
-	    docker {
-	     image 'hsqldb'
-         args  '-d -p 9001:9001'
-	    }
-	}
+	agent any
 
 	tools {
         maven 'Default'
@@ -33,10 +28,18 @@ pipeline {
 			post {
 				success {
 					echo 'done.'
+					junit '**/target/surefire-reports/*.xml'
 				}
 			}
 		}
 		stage('System Tests') {
+			agent {
+                docker {
+                    image 'hsqldb'
+                    args  '-d -p 9001:9001'
+                }
+            }
+
 			steps {
 				echo 'running Docker'
 
@@ -46,7 +49,6 @@ pipeline {
 	post {
             always {
                 archiveArtifacts artifacts: '**/target/**/*', onlyIfSuccessful: true
-                junit '**/target/surefire-reports/*.xml'
             }
     }
 }
