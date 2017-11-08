@@ -17,7 +17,7 @@ pipeline {
 		stage('Style checking') {
 		    steps {
 		        echo 'Style Checking...'
-		        [$class: 'hudson.plugins.checkstyle.CheckStylePublisher', pattern: '**/target/checkstyle-result.xml', unstableTotalAll:'0',unhealthy:'100', healthy:'100']
+		        checkstyle canComputeNew: false, canRunOnFailed: true, defaultEncoding: '', healthy: '100', pattern: '', unHealthy: '100'
 		    }
 		}
 		stage('Compile & Test') {
