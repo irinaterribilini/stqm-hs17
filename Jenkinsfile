@@ -36,5 +36,9 @@ pipeline {
 				echo 'running Docker'
 			}
 		}
+		stage('Finishing build' {
+		    echo 'Saving Artifacts...'
+		    archiveArtifacts artifacts: '**/target/checkstyle-results.xml, **/target/MRSfx*, **/target/site/**/*', onlyIfSuccessful: true
+		}
 	}
 }
