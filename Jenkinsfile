@@ -34,8 +34,7 @@ pipeline {
 		stage('System Tests') {
 			steps {
 				echo 'running Docker'
-				docker {
-                    image 'hsqldb'
+				docker { image 'hsqldb'
                     label 'HSQLDB'
                     args  '-d -p 9001:9001'
                 }
