@@ -3,6 +3,12 @@
 pipeline {
 	agent any
 
+    docker {
+        image 'blacklabelops:hsqldb'
+        label 'HSQLDB'
+        args  '-d -p 9001:9001'
+    }
+
 	tools {
         maven 'Default'
         jdk 'Default'
@@ -34,11 +40,6 @@ pipeline {
 		stage('System Tests') {
 			steps {
 				echo 'running Docker'
-				docker {
-                    image 'blacklabelops:hsqldb'
-                    label 'HSQLDB'
-                    args  '-d -p 9001:9001'
-                }
 			}
 		}
 	}
