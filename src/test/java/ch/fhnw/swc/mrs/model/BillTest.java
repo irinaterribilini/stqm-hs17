@@ -22,9 +22,9 @@ public class BillTest {
         assertEquals("", lines[3]);
         assertEquals("Days   Price  Title", lines[4]);
         assertEquals("-------------------", lines[5]);
-        assertEquals("   1    8.40  Avatar", lines[6]);
-        assertEquals("   2   17.20  Casablanca", lines[7]);
-        assertEquals("   3   26.40  Tron", lines[8]);
+        assertEquals("   1    8,40  Avatar", lines[6]);
+        assertEquals("   2   17,20  Casablanca", lines[7]);
+        assertEquals("   3   26,40  Tron", lines[8]);
     }
 
     private List<Rental> createRentalList() {
