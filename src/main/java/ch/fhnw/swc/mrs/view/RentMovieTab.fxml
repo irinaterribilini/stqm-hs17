@@ -20,7 +20,7 @@
 	<center>
 		<TableView fx:id="availableMoviesTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
 			<columns>
-				<TableColumn fx:id="idColumn" prefWidth="75.0" text="Movie ID" />
+				<TableColumn fx:id="idColumn" id="idColumn" prefWidth="75.0" text="Movie ID" />
 				<TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
 				<TableColumn fx:id="releaseDateColumn" prefWidth="75.0" text="Release Date" />
 				<TableColumn fx:id="priceCategoryColumn" prefWidth="75.0" text="Price Category" />

@@ -3,7 +3,12 @@ package ch.fhnw.swc.mrs.view;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasText;
 
-import javafx.scene.Parent;
+import ch.fhnw.swc.mrs.MovieRentalSystem;
+import ch.fhnw.swc.mrs.data.DbMRSServices;
+import ch.fhnw.swc.mrs.model.MRSServices;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.Before;
@@ -15,32 +20,40 @@ import org.testfx.framework.junit.ApplicationTest;
  * Created by François Martin on 06.12.17.
  */
 public class RentMovieTabTest extends ApplicationTest {
-  @Override public void start(Stage stage) {
-    Parent sceneRoot = new ClickApplication.ClickPane();
-    Scene scene = new Scene(sceneRoot, 100, 100);
+
+  private MRSServices backend = new DbMRSServices();
+
+  @Override public void start(Stage stage) throws IOException {
+    backend.init();
+    stage.setTitle("Software Construction Lab");
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(MovieRentalSystem.class.getResource("view/MRS.fxml"));
+    Scene scene = new Scene(loader.load());
     stage.setScene(scene);
     stage.show();
+    MRSController controller = loader.getController();
+    controller.initTabs(backend);
   }
 
   @Before
   public void setup() throws Exception {
     FxToolkit.registerPrimaryStage();
-    FxToolkit.setupApplication(ClickApplication.class);
+    FxToolkit.setupApplication(MovieRentalSystem.class);
   }
 
   @Test
-  public void should_contain_button() {
+  public void verifyStartupState() {
     // expect:
-    verifyThat(".button", hasText("click me!"));
+    verifyThat(lookup("User ID"), hasText("User ID"));
+    verifyThat(lookup("Movie 1"), hasText("Movie 1"));
   }
 
   @Test
-  public void should_click_on_button() {
+  public void clickMovie() {
     // when:
-    clickOn(".button");
-
+    clickOn(hasText("Movie 1"));
 
     // then:
-    verifyThat(".button", hasText("clicked!"));
+    verifyThat(lookup("Movie 1"), Node::isFocused);
   }
 }
