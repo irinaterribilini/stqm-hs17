@@ -1,9 +1,9 @@
 package ch.fhnw.swc.mrs.data;
 
+import ch.fhnw.swc.mrs.model.*;
+
 import java.sql.Connection;
 import java.util.List;
-
-import ch.fhnw.swc.mrs.model.*;
 
 public class DbMRSServices implements MRSServices {
     private static final String DB_CONNECTION = "jdbc:hsqldb:hsql://localhost/xdb";
@@ -167,9 +167,12 @@ public class DbMRSServices implements MRSServices {
 	    try {
             db = new HsqlDatabase();
             db.initDB(DB_CONNECTION);
+            // run this to clear the database
+			//db.getConnection().prepareStatement("DROP SCHEMA PUBLIC CASCADE").execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 	}
 
 }
