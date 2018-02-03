@@ -1,12 +1,9 @@
 package ch.fhnw.swc.mrs.view;
 
-import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.matcher.base.NodeMatchers.hasText;
-
 import ch.fhnw.swc.mrs.MovieRentalSystem;
 import ch.fhnw.swc.mrs.data.DbMRSServices;
 import ch.fhnw.swc.mrs.model.MRSServices;
-import java.io.IOException;
+import ch.fhnw.swc.mrs.model.PriceCategory;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,6 +13,11 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
+import java.io.IOException;
+
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.base.NodeMatchers.hasText;
+
 /**
  * Created by François Martin on 06.12.17.
  */
@@ -24,6 +26,7 @@ public class RentMovieTabTest extends ApplicationTest {
   private MRSServices backend = new DbMRSServices();
 
   @Override public void start(Stage stage) throws IOException {
+    PriceCategory.init();
     backend.init();
     stage.setTitle("Software Construction Lab");
     FXMLLoader loader = new FXMLLoader();
